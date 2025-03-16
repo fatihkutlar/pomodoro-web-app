@@ -1,0 +1,177 @@
+/**
+ * Pomodoro Tema Stilleri
+ * Açık ve karanlık tema ayarları
+ */
+
+/* Açık Tema (Varsayılan) */
+body.light-theme {
+    --bg-color: #f5f5f5;
+    --card-bg-color: #ffffff;
+    --text-color: #333333;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --btn-bg-color: #f0f0f0;
+    --btn-text-color: #333333;
+    --btn-hover-bg-color: #e0e0e0;
+    --btn-active-bg-color: #d0d0d0;
+}
+
+/* Karanlık Tema */
+body.dark-theme {
+    --bg-color: #121212;
+    --card-bg-color: #1e1e1e;
+    --text-color: #e0e0e0;
+    --border-color: #333333;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --btn-bg-color: #2d2d2d;
+    --btn-text-color: #e0e0e0;
+    --btn-hover-bg-color: #383838;
+    --btn-active-bg-color: #404040;
+}
+
+/* Tema Geçiş Animasyonları */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.app-container, .timer-container, .task-item, .setting-item,
+.mode-selector, .control-btn, .task-action-btn, .settings-group {
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Tema-spesifik Stil Ayarlamaları */
+
+/* Karanlık Tema İçin İlerleme Halkası */
+body.dark-theme .progress-ring-circle {
+    stroke-width: 10px; /* Karanlık temada daha kalın çizgi */
+}
+
+/* Karanlık Tema Form Elementleri */
+body.dark-theme input[type="text"],
+body.dark-theme input[type="number"],
+body.dark-theme select {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+body.dark-theme input[type="text"]:focus,
+body.dark-theme input[type="number"]:focus,
+body.dark-theme select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 82, 82, 0.2);
+}
+
+/* Açık Tema Form Elementleri */
+body.light-theme input[type="text"],
+body.light-theme input[type="number"],
+body.light-theme select {
+    background-color: #ffffff;
+    color: #333333;
+    border-color: #e0e0e0;
+}
+
+body.light-theme input[type="text"]:focus,
+body.light-theme input[type="number"]:focus,
+body.light-theme select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 82, 82, 0.1);
+}
+
+/* Buton Stilleri */
+
+/* Karanlık Tema Butonları */
+body.dark-theme button {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+}
+
+body.dark-theme button.primary-btn,
+body.dark-theme #save-settings-btn,
+body.dark-theme #save-task-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+body.dark-theme button.secondary-btn,
+body.dark-theme #cancel-task-btn,
+body.dark-theme #reset-settings-btn {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border: 1px solid #444;
+}
+
+/* Açık Tema Butonları */
+body.light-theme button {
+    background-color: #f0f0f0;
+    color: #333333;
+}
+
+body.light-theme button.primary-btn,
+body.light-theme #save-settings-btn,
+body.light-theme #save-task-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+body.light-theme button.secondary-btn,
+body.light-theme #cancel-task-btn,
+body.light-theme #reset-settings-btn {
+    background-color: #f0f0f0;
+    color: #333333;
+    border: 1px solid #e0e0e0;
+}
+
+/* İkon Renkleri */
+body.dark-theme .fas,
+body.dark-theme .far {
+    color: #e0e0e0;
+}
+
+body.light-theme .fas,
+body.light-theme .far {
+    color: #555555;
+}
+
+/* Mod Butonları */
+body.dark-theme .mode-btn {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+}
+
+body.light-theme .mode-btn {
+    background-color: #f0f0f0;
+    color: #333333;
+}
+
+/* Karanlık Temada Görev Öğeleri */
+body.dark-theme .task-item {
+    background-color: #222222;
+}
+
+body.dark-theme .task-checkbox {
+    background-color: #2d2d2d;
+    border-color: #444;
+}
+
+/* Karanlık Temada İstatistik Grafikleri */
+body.dark-theme canvas {
+    filter: brightness(0.9);
+}
+
+/* Tema Geçiş Butonları */
+body.dark-theme .theme-toggle .fa-sun {
+    color: #aaa;
+}
+
+body.dark-theme .theme-toggle .fa-moon {
+    color: #ffda79;
+}
+
+body.light-theme .theme-toggle .fa-sun {
+    color: #ffb300;
+}
+
+body.light-theme .theme-toggle .fa-moon {
+    color: #aaa;
+}
