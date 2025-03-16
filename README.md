@@ -1,4 +1,4 @@
-# Pomodoro Web Sitesi
+# Pomodoro Web App
 
 Bu proje, Pomodoro tekniğini uygulamak için kullanılan bir web uygulamasıdır. Kullanıcılar çalışma ve mola sürelerini takip edebilir, görevlerini yönetebilir ve istatistiklerini görüntüleyebilirler.
 
