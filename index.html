@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Zamanlayıcı</title>
+    <!-- CSS dosyaları -->
+    <link rel="stylesheet" href="css/themes/themes.css">
+    <link rel="stylesheet" href="css/responsive/responsive.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome ikonları -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Bölümü -->
+        <header>
+            <h1>Pomodoro Zamanlayıcı</h1>
+            <div class="theme-toggle">
+                <i class="fas fa-sun"></i>
+                <label class="switch">
+                    <input type="checkbox" id="theme-switch">
+                    <span class="slider round"></span>
+                </label>
+                <i class="fas fa-moon"></i>
+            </div>
+        </header>
+
+        <!-- Ana İçerik -->
+        <main>
+            <!-- Mod Seçimi -->
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="pomodoro">Pomodoro</button>
+                <button class="mode-btn" data-mode="shortBreak">Kısa Mola</button>
+                <button class="mode-btn" data-mode="longBreak">Uzun Mola</button>
+            </div>
+
+            <!-- Zamanlayıcı Bölümü -->
+            <div class="timer-container">
+                <div class="timer-circle">
+                    <div class="timer-progress-ring">
+                        <svg class="progress-ring" width="300" height="300">
+                            <circle class="progress-ring-circle" stroke-width="8" stroke-linecap="round" fill="transparent" r="140" cx="150" cy="150"/>
+                        </svg>
+                    </div>
+                    <div class="timer-display">
+                        <span id="minutes">25</span>:<span id="seconds">00</span>
+                    </div>
+                </div>
+                
+                <!-- Zamanlayıcı Kontrolleri -->
+                <div class="timer-controls">
+                    <button id="start-btn" class="control-btn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="pause-btn" class="control-btn hidden">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <button id="reset-btn" class="control-btn">
+                        <i class="fas fa-redo-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tamamlanan Pomodoro Sayısı -->
+            <div class="pomodoro-count">
+                <span id="completed-count">0</span> pomodoro tamamlandı
+            </div>
+        </main>
+
+        <!-- Görev Listesi Bölümü -->
+        <section class="tasks-section">
+            <h2>Görevler <button id="add-task-btn" class="add-btn"><i class="fas fa-plus"></i></button></h2>
+            
+            <div class="task-form hidden" id="task-form">
+                <input type="text" id="task-input" placeholder="Görev ekle...">
+                <div class="task-form-actions">
+                    <div class="pomodoro-estimate">
+                        <label for="pomodoro-estimate-input">Tahmini Pomodoro:</label>
+                        <input type="number" id="pomodoro-estimate-input" min="1" value="1">
+                    </div>
+                    <div class="task-form-buttons">
+                        <button id="save-task-btn">Kaydet</button>
+                        <button id="cancel-task-btn">İptal</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tasks-container" id="tasks-container">
+                <!-- Görevler burada JavaScript ile oluşturulacak -->
+                <div class="empty-tasks-message">Henüz görev eklenmedi</div>
+            </div>
+        </section>
+
+        <!-- İstatistikler Bölümü -->
+        <section class="statistics-section">
+            <h2>İstatistikler</h2>
+            <div class="statistics-container">
+                <div class="statistics-tabs">
+                    <button class="tab-btn active" data-tab="daily">Günlük</button>
+                    <button class="tab-btn" data-tab="weekly">Haftalık</button>
+                    <button class="tab-btn" data-tab="monthly">Aylık</button>
+                </div>
+                <div class="statistics-content">
+                    <div class="tab-content active" id="daily-stats">
+                        <canvas id="daily-chart"></canvas>
+                    </div>
+                    <div class="tab-content" id="weekly-stats">
+                        <canvas id="weekly-chart"></canvas>
+                    </div>
+                    <div class="tab-content" id="monthly-stats">
+                        <canvas id="monthly-chart"></canvas>
+                    </div>
+                </div>
+                <div class="statistics-summary">
+                    <div class="stat-item">
+                        <span class="stat-label">Bugün:</span>
+                        <span class="stat-value" id="today-count">0</span> pomodoro
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Bu hafta:</span>
+                        <span class="stat-value" id="week-count">0</span> pomodoro
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Bu ay:</span>
+                        <span class="stat-value" id="month-count">0</span> pomodoro
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ayarlar Bölümü -->
+        <section class="settings-section">
+            <h2>Ayarlar</h2>
+            <div class="settings-container">
+                <div class="settings-group">
+                    <h3>Zamanlayıcı</h3>
+                    <div class="setting-item">
+                        <label for="pomodoro-duration">Pomodoro Süresi (dk):</label>
+                        <input type="number" id="pomodoro-duration" min="1" max="60" value="25">
+                    </div>
+                    <div class="setting-item">
+                        <label for="short-break-duration">Kısa Mola Süresi (dk):</label>
+                        <input type="number" id="short-break-duration" min="1" max="30" value="5">
+                    </div>
+                    <div class="setting-item">
+                        <label for="long-break-duration">Uzun Mola Süresi (dk):</label>
+                        <input type="number" id="long-break-duration" min="1" max="60" value="15">
+                    </div>
+                    <div class="setting-item">
+                        <label for="auto-start-breaks">Molaları otomatik başlat:</label>
+                        <label class="switch">
+                            <input type="checkbox" id="auto-start-breaks">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="auto-start-pomodoros">Pomodoro'ları otomatik başlat:</label>
+                        <label class="switch">
+                            <input type="checkbox" id="auto-start-pomodoros">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="long-break-interval">Uzun mola aralığı (pomodoro):</label>
+                        <input type="number" id="long-break-interval" min="1" max="10" value="4">
+                    </div>
+                </div>
+                
+                <div class="settings-group">
+                    <h3>Ses</h3>
+                    <div class="setting-item">
+                        <label for="alarm-sound">Bildirim Sesi:</label>
+                        <select id="alarm-sound">
+                            <option value="bell">Zil</option>
+                            <option value="digital">Dijital</option>
+                            <option value="kitchen">Mutfak Zamanlayıcısı</option>
+                            <option value="wood">Tahta</option>
+                        </select>
+                        <button id="test-sound-btn" class="small-btn">Test</button>
+                    </div>
+                    <div class="setting-item">
+                        <label for="alarm-volume">Ses Seviyesi:</label>
+                        <input type="range" id="alarm-volume" min="0" max="100" value="50">
+                    </div>
+                    <div class="setting-item">
+                        <label for="ticking-enabled">Tik Tak Sesi:</label>
+                        <label class="switch">
+                            <input type="checkbox" id="ticking-enabled">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="ticking-volume">Tik Tak Sesi Seviyesi:</label>
+                        <input type="range" id="ticking-volume" min="0" max="100" value="20">
+                    </div>
+                </div>
+            </div>
+            <div class="settings-actions">
+                <button id="save-settings-btn">Kaydet</button>
+                <button id="reset-settings-btn">Varsayılan Ayarlara Dön</button>
+            </div>
+        </section>
+
+        <!-- Alt Bilgi -->
+        <footer>
+            <p>Pomodoro Zamanlayıcı &copy; 2025</p>
+            <div class="footer-links">
+                <button id="export-data-btn">Verileri Dışa Aktar</button>
+                <button id="import-data-btn">Verileri İçe Aktar</button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Chart.js Kütüphanesi -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- JavaScript dosyaları -->
+    <script src="js/timer.js"></script>
+    <script src="js/tasks.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/statistics.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
